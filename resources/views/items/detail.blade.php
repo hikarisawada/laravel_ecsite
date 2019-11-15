@@ -55,10 +55,23 @@
                 <div class="item_descriptionn">
                   {{ $current_item->description}}
                 </div>
+                <div class="item_num">
+
+
+                  <select name='item_num'>
+                    @for($item_num = $current_item->item_num; $item_num >= 1; $item_num--)
+                        <option value="{{ $item_num }}" selected="selected">{{ $item_num}}</option>
+                    @endfor
+                  </select>
+
+                </div>
 
                 <div class="">
+                  <form action="{{ route('cart.cart') }}" method="post">
+                    @csrf
                   <!-- <a href="{{ route('cart.cart') }}">カートに入れる</a> -->
                   <button type="submit" name="button" class="btn btn-primary">カートに入れる</button>
+                  </form>
                 </div>
                 <div class="">
                 <a href="/items">戻る</a>

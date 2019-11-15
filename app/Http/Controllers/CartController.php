@@ -16,7 +16,7 @@ class CartController extends Controller
   //   $current_item = Item::find();
   //
   //   // dd($current_item);
-  // 
+  //
   //   $images = $current_item->ItemImage()->first();
   //
   //   // dd($images);
@@ -29,8 +29,26 @@ class CartController extends Controller
   //   ]);
   //
   // }
+
   public function showCart()
 {
-  return view('cart/cart');
+
+  $items = \DB::table('carts')
+  ->join('items','items.id','=','carts.item_id')
+  ->join('item_images','items.id','=','item_images.item_id')
+  ->where('status', 1)
+  ->get();
+
+
+  return view('cart/cart', [
+      'items' => $items,
+  ]);
 }
+
+public function deleteCart()
+{
+// カートから削除を押したら、statusを3にする、とかにしたい
+
+}
+
 }

@@ -18,6 +18,7 @@ class ItemsTableSeeder extends Seeder
           'discount_price' => $num * 90,
           'description' => "サンプル {$num}の商品です。お買い得ですよ！",
           'is_enabled' => 1,
+          'item_num' => $num,
 
         ]);
       }

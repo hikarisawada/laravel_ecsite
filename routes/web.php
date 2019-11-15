@@ -22,9 +22,10 @@ Route::group(['middleware' => 'auth'], function() {
 
 Route::get('/items', 'ItemController@index')->name('items.index');
 Route::get('/items/{item_id}', 'ItemController@detail')->name('items.detail');
-Route::post('/items/{item_id}', 'ItemController@detail');
+Route::post('/items/{item_id}', 'ItemController@addCart');
 
 Route::get('/cart', 'CartController@showCart')->name('cart.cart');
+Route::post('/cart', 'CartController@showCart');
 
 // Route::get('/items', function () {
 //     return view('welcome');
