@@ -25,8 +25,8 @@ Route::get('/items/{item_id}', 'ItemController@detail')->name('items.detail');
 Route::post('/items/{item_id}', 'ItemController@addCart');
 
 Route::get('/cart', 'CartController@showCart')->name('cart.cart');
-Route::post('/cart', 'CartController@showCart');
-Route::put('/cart', 'CartController@deleteCart')->name('cart.deleteCart');
+Route::post('/cart/{id}', 'CartController@showCartPost')->name('cart.add_cart');
+Route::put('/cart/{id}', 'CartController@deleteCart')->name('cart.deleteCart');
 
 // Route::get('/items', function () {
 //     return view('welcome');

@@ -12,7 +12,6 @@
             <!-- <div class="index_item_main"> -->
               <div class="index_image">
                 <a href="{{ route('items.detail', ['id' => $item->id]) }}">
-                  <img src="{{ asset($item->image_url)}}" alt="" class="item_first_image">
                 </a>
               </div>
               <div class="index_item_label">
@@ -29,7 +28,7 @@
               <div class="">
                 {{ $item->cart_item_num}}個
               </div>
-              <form action="{{ route('cart.deleteCart') }}" method="post">
+              <form action="{{ route('cart.deleteCart', ['id' => $item->id]) }}" method="post">
                 @csrf
                 @method('PUT')
                 <div class="text-right">
