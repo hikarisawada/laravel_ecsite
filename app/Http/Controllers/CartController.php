@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Item;
 use App\ItemImage;
+use App\Cart;
+
 use Illuminate\Http\Request;
 
 class CartController extends Controller
@@ -39,16 +41,22 @@ class CartController extends Controller
   ->where('status', 1)
   ->get();
 
+  // dd($items);
 
   return view('cart/cart', [
       'items' => $items,
   ]);
 }
 
-public function deleteCart()
-{
-// カートから削除を押したら、statusを3にする、とかにしたい
+    public function deleteCart(int $id)
+    {
+      // カートから削除を押したら、statusを3にする、とかにしたい
+        $cart = Cart::find($id);
+        dd($cart);
+        $cart->status = 3;
 
-}
+        $cart->save();
+
+    }
 
 }

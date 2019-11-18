@@ -26,6 +26,7 @@ Route::post('/items/{item_id}', 'ItemController@addCart');
 
 Route::get('/cart', 'CartController@showCart')->name('cart.cart');
 Route::post('/cart', 'CartController@showCart');
+Route::put('/cart', 'CartController@deleteCart')->name('cart.deleteCart');
 
 // Route::get('/items', function () {
 //     return view('welcome');

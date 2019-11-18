@@ -29,9 +29,13 @@
               <div class="">
                 {{ $item->cart_item_num}}個
               </div>
-              <div class="">
-                <a href="#">カートから削除</a>
-              </div>
+              <form action="{{ route('cart.deleteCart') }}" method="post">
+                @csrf
+                @method('PUT')
+                <div class="text-right">
+                  <button type="submit" class="btn">カートから削除</button>
+                </div>
+              </form>
           <!-- </div> -->
         </li>
       </ul>

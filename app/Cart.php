@@ -10,12 +10,12 @@ class Cart extends Model
   {
 
     // user_id, item_id, status, cart_item_num,カラムにデータの挿入を許可する
-    protected $fillable = [
-        'user_id',
-        'item_id',
-        'status',
-        'cart_item_num',
-    ];
+    // protected $fillable = [
+    //     'user_id',
+    //     'item_id',
+    //     'status',
+    //     'cart_item_num',
+    // ];
 
   }
 }
