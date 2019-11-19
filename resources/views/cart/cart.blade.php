@@ -12,6 +12,8 @@
             <!-- <div class="index_item_main"> -->
               <div class="index_image">
                 <a href="{{ route('items.detail', ['id' => $item->id]) }}">
+                  <img src="{{ asset($images->first()->image_url)}}" alt="">
+
                 </a>
               </div>
               <div class="index_item_label">
@@ -40,9 +42,14 @@
       </ul>
         </div>
         @endforeach
+
+          @csrf
+          @method('PUT')
+
         <div class="item_detail">
           <button type="submit" name="button" class="btn btn-primary">購入する</button>
         </div>
+
         @else
         <div class="">
           カートに商品は入っていません。
@@ -50,11 +57,8 @@
 
         @endif
             <div class="">
-              <a href="{{ route('items.index')}}">ショッピングを続ける</a>
+              <a href="{{ route('items.index') }}">ショッピングを続ける</a>
             </div>
-
-
-
 
 
   @endsection

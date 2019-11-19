@@ -41,7 +41,12 @@ class ItemController extends Controller
 
     // dd($current_item);
 
-    $images = $current_item->ItemImage()->first();
+    $images = $current_item->ItemImage()->get();
+
+    // 画像がなかったら/itemsにリダイレクト
+    if($images == null){
+      return redirect('/items');
+    }
 
     // dd($images);
 
@@ -54,26 +59,26 @@ class ItemController extends Controller
 
   }
 
-  public function create(Request $request)
-  {
-
-    // インスタンス作成
-    $cart_item = new Cart();
-
-    // 入力値を代入する
-    $cart_item->item_id = $request->item_id;
-    $cart_item->item_num = $request->item_num;
-
-    // dd();
-    // カートに入れるを押したら、cartsにデータ入れる、にしたい
-    Auth::user()->carts()->save($cart_item);
-
-
-    return redirect()->route('cart.cart', [
-        // 'id' => $folder->id,
-    ]);
-
-  }
+  // public function create(Request $request)
+  // {
+  //
+  //   // インスタンス作成
+  //   $cart_item = new Cart();
+  //
+  //   // 入力値を代入する
+  //   $cart_item->item_id = $request->item_id;
+  //   $cart_item->item_num = $request->item_num;
+  //
+  //   // dd();
+  //   // カートに入れるを押したら、cartsにデータ入れる、にしたい
+  //   Auth::user()->carts()->save($cart_item);
+  //
+  //
+  //   return redirect()->route('cart.cart', [
+  //       // 'id' => $folder->id,
+  //   ]);
+  //
+  // }
 
 //   public function cart()
 // {

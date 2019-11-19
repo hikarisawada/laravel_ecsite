@@ -19,7 +19,7 @@
         @if(Auth::check())
           <span class="my-navbar-item">ようこそ, {{ Auth::user()->name }}さん</span>
           ｜
-          <a href="{{ route('cart.cart') }}" id="" class="my-navbar-item">買い物かご</a>
+          <a href="{{ route('cart.showCart') }}" id="" class="my-navbar-item">買い物かご</a>
           ｜
           <a href="#" id="logout" class="my-navbar-item">ログアウト</a>
           <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

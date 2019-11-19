@@ -24,9 +24,10 @@ Route::get('/items', 'ItemController@index')->name('items.index');
 Route::get('/items/{item_id}', 'ItemController@detail')->name('items.detail');
 Route::post('/items/{item_id}', 'ItemController@addCart');
 
-Route::get('/cart', 'CartController@showCart')->name('cart.cart');
+Route::get('/cart', 'CartController@showCart')->name('cart.showCart');
 Route::post('/cart/{id}', 'CartController@showCartPost')->name('cart.add_cart');
 Route::put('/cart/{id}', 'CartController@deleteCart')->name('cart.deleteCart');
+// Route::put('/cart/{id}', 'CartController@cashCart')->name('cart.cash');
 
 // Route::get('/items', function () {
 //     return view('welcome');

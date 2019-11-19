@@ -33,7 +33,7 @@ class CartController extends Controller
   // }
   public function showCartPost(int $id, Request $request)
   {
-    // もしデータが存在していたらupdate分を作る 
+    // もしデータが存在していたらupdate分を作る
     $user = Auth::user();
     $cart = new Cart();
     $cart->user_id = $user->id;
@@ -53,27 +53,63 @@ class CartController extends Controller
   ->where('status', 1)
   ->where('user_id', $user->id)
   ->get();
-  // join('item_images','items.id','=','item_images.item_id')
 
   // dd($items);
+  // cartのidどうやってとったらいいんだ
+  // $carts = \DB::table('carts')->get();
+
+  // dd($carts);
+
+  $images = \DB::table('carts')
+  ->join('item_images','item_images.item_id','=','carts.item_id')
+  ->where('status', 1)
+  ->where('user_id', $user->id)
+  // 同じ画像が出てきちゃう
+  // ->where('id', $carts->id)
+  ->get();
+  // ->join('item_images','items.id','=','item_images.item_id')
+
+  // dd($images);
 
   return view('cart/cart', [
       'items' => $items,
+      'images' => $images,
   ]);
 }
 
     public function deleteCart(int $id)
     {
-      // カートから削除を押したら、statusを3にする、とかにしたい
-      $user = Auth::user();
+        // カートから削除を押したら、statusを3にする、とかにしたい
+        $user = Auth::user();
 
-        $cart = Cart::where('item_id',$id)->where('user_id',$user->id)->get()->first();
+        $cart = Cart::where('item_id',$id)
+        ->where('user_id',$user->id)
+        ->get()
+        ->first();
         // dd($cart->get()->first());
 
         $cart->status = 3;
 
         $cart->save();
         return redirect('/cart');
+
+    }
+
+    public function cashCart(int $id)
+    {
+        // カートの中身を買うやつ（新しいtable作らないと）
+        $user = Auth::user();
+        //
+        // $cart = Cart::where('item_id',$id)
+        // ->where('user_id',$user->id)
+        // ->get()
+        // ->first();
+        // // dd($cart->get()->first());
+        //
+        // $cart->status = 3;
+        //
+        // $cart->save();
+        // return redirect('/cart');
 
     }
 

@@ -7,32 +7,14 @@
             <div class="item_left">
               <!-- <a href="#"> -->
               <div class="image_main">
-                <img src="{{ asset($images->image_url)}}" alt="">
+                <img src="{{ asset($images->first()->image_url)}}" alt="">
 
               </div>
                 <ul class="image_gallery">
 
-                  <li>
-                    <img src="{{ asset($images->image_url)}}" alt="" class="item_image">
-                  </li>
-                  <li>
-                    <img src="{{ asset($images->image_url)}}" alt="" class="item_image">
-                  </li>
-                  <li>
-                    <img src="{{ asset($images->image_url)}}" alt="" class="item_image">
-                  </li>
-                  <li>
-                    <img src="{{ asset($images->image_url)}}" alt="" class="item_image">
-                  </li>
-                  <li>
-                    <img src="{{ asset($images->image_url)}}" alt="" class="item_image">
-                  </li>
-                  <li>
-                    <img src="{{ asset($images->image_url)}}" alt="" class="item_image">
-                  </li>
-                  <li>
-                    <img src="{{ asset($images->image_url)}}" alt="" class="item_image">
-                  </li>
+                  @foreach ($images as $key => $value)
+                    <li><img src="{{$value->image_url}}" class="item_image"></li>
+                  @endforeach
 
                 </ul>
 
@@ -70,7 +52,7 @@
 
                 <div class="">
                     @csrf
-                  <!-- <a href="{{ route('cart.cart') }}">カートに入れる</a> -->
+                  <!-- <a href="{{ route('cart.showCart') }}">カートに入れる</a> -->
                   <button type="submit" name="button" class="btn btn-primary">カートに入れる</button>
                 </div>
               </form>
