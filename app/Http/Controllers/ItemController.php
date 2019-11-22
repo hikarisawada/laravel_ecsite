@@ -22,7 +22,10 @@ class ItemController extends Controller
     // dd($images);
     $items = \DB::table('items')
     ->join('item_images','items.id','=','item_images.item_id')
-    ->get();
+    ->where('is_enabled', 1)
+    // ->groupBy('items.id')
+    // ->get();
+    ->paginate(4);
 
 
     return view('items/index', [
