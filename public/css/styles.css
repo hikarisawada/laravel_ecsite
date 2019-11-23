@@ -82,6 +82,21 @@ ul {
    display: block;
  }
 
+ .index_item_price {
+   text-decoration: line-through;
+   color: #e73656;
+   /* font-size: 20px; */
+   /* margin-top: 10px; */
+
+ }
+
+ .index_item_discount_price {
+   color: #e73656;
+   /* font-size: 30px; */
+   /* margin-top: 10px; */
+
+ }
+
 
 /* 詳細ページ */
 

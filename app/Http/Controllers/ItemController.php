@@ -4,73 +4,51 @@ namespace App\Http\Controllers;
 
 use App\Item;
 use App\ItemImage;
+use App\Cart;
 use Illuminate\Http\Request;
-
 
 class ItemController extends Controller
 {
     public function index()
   {
-    // return "Hello world";
-    // $items = Item::all();
-    // dd($items);
-    // $images = ItemImage::all();
-    // dd($images);
-    // $images = $items->ItemImage()->first();
+    // データ整形
+    $item_array = array();
 
-    // dd($images);
     $items = \DB::table('items')
-    ->join('item_images','items.id','=','item_images.item_id')
-    ->get();
+    ->where('is_enabled', 1)
+    ->paginate(4);
 
+    foreach ($items as $key => $item) {
+      // 最初に登録された画像の1枚を取得する
+      $image = ItemImage::where('item_id','=',$item->id)->get()->first();
+      if(isset($image)){
+        $first_image = array('item'=> $item, 'images'=> $image->image_url);
+        array_push($item_array, $first_image);
+      }
+    }
 
     return view('items/index', [
-        'items' => $items,
-        // 'images' => $images,
+      'demo_item' => $item_array,
+      'items' => $items
     ]);
 
   }
 
   public function detail(int $id)
-{
-  // return "Hello world";
-  // $items = Item::all();
-  // dd($items);
-  $current_item = Item::find($id);
+  {
+    $current_item = Item::find($id);
+    $images = $current_item->ItemImage()->get();
 
-  // dd($current_item);
+    // 画像がなかったら/itemsにリダイレクト
+    if($images == null){
+      return redirect('/items');
+    }
 
-  $images = $current_item->ItemImage()->first();
+    return view('items/detail', [
+        'current_item' => $current_item,
+        'images' => $images
+    ]);
 
-  // dd($images);
-
-  return view('items/detail', [
-      // 'items' => $items,
-      'current_item' => $current_item,
-      'images' => $images,
-
-  ]);
-
-}
-
-//   public function cart()
-// {
-//   // return "Hello world";
-//   // $items = Item::all();
-//   // dd($items);
-//   $current_item = Item::find();
-//
-//   // dd($current_item);
-//
-//   $images = $current_item->ItemImage()->first();
-//
-//   // dd($images);
-//
-//   return view('items/cart', [
-//       // 'items' => $items,
-//       'current_item' => $current_item,
-//       'images' => $images,
-//
-//   ]);
+  }
 
 }

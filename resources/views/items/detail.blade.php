@@ -7,32 +7,18 @@
             <div class="item_left">
               <!-- <a href="#"> -->
               <div class="image_main">
-                <img src="{{ asset($images->image_url)}}" alt="">
+                @if ($images)
+                  <img src="/" alt="">
+                @else
+                  <img src="{{ asset($images->first()->image_url)}}" alt="">
+                @endif
 
               </div>
                 <ul class="image_gallery">
 
-                  <li>
-                    <img src="{{ asset($images->image_url)}}" alt="" class="item_image">
-                  </li>
-                  <li>
-                    <img src="{{ asset($images->image_url)}}" alt="" class="item_image">
-                  </li>
-                  <li>
-                    <img src="{{ asset($images->image_url)}}" alt="" class="item_image">
-                  </li>
-                  <li>
-                    <img src="{{ asset($images->image_url)}}" alt="" class="item_image">
-                  </li>
-                  <li>
-                    <img src="{{ asset($images->image_url)}}" alt="" class="item_image">
-                  </li>
-                  <li>
-                    <img src="{{ asset($images->image_url)}}" alt="" class="item_image">
-                  </li>
-                  <li>
-                    <img src="{{ asset($images->image_url)}}" alt="" class="item_image">
-                  </li>
+                  @foreach ($images as $key => $value)
+                    <li><img src="{{$value->image_url}}" class="item_image"></li>
+                  @endforeach
 
                 </ul>
 
@@ -55,11 +41,26 @@
                 <div class="item_descriptionn">
                   {{ $current_item->description}}
                 </div>
+                <form action="{{ route('cart.add_cart', ['id' => $current_item->id]) }}" method="post">
+
+                <div class="item_num">
+
+
+                  <select name='item_num'>
+                    @for($item_num = $current_item->item_num; $item_num >= 1; $item_num--)
+                        <option value="{{ $item_num }}" selected="selected" name="item_num">{{ $item_num}}</option>
+                    @endfor
+                  </select>
+
+                </div>
 
                 <div class="">
-                  <!-- <a href="{{ route('cart.cart') }}">カートに入れる</a> -->
+                    @csrf
+                  <!-- <a href="{{ route('cart.showCart') }}">カートに入れる</a> -->
                   <button type="submit" name="button" class="btn btn-primary">カートに入れる</button>
                 </div>
+              </form>
+
                 <div class="">
                 <a href="/items">戻る</a>
               </div>
