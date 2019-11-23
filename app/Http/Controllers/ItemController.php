@@ -27,9 +27,21 @@ class ItemController extends Controller
       }
     }
 
+    foreach ($items as $key => $item) {
+      $image = ItemImage::where('item_id', '=', $item->id)->get()->first();
+
+      if (isset($image)) {
+        $first_image = array('item'=>$item, 'images'=>$image->image_url);
+        // dd($first_image);
+        array_push($item_array, $first_image);
+        // dd($item_array);
+      }
+    }
+
+
     return view('items/index', [
-      'demo_item' => $item_array,
-      'items' => $items
+      'items' => $item_array,
+      'index_items' => $items,
     ]);
 
   }

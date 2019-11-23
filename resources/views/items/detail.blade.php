@@ -7,11 +7,11 @@
             <div class="item_left">
               <!-- <a href="#"> -->
               <div class="image_main">
-                @if ($images)
-                  <img src="/" alt="">
-                @else
-                  <img src="{{ asset($images->first()->image_url)}}" alt="">
-                @endif
+              @if ($images)
+                <img src="{{ asset($images->first()->image_url)}}" alt="">
+              @else
+                <img src="/" alt="">
+              @endif
 
               </div>
                 <ul class="image_gallery">
