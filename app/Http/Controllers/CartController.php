@@ -36,16 +36,28 @@ class CartController extends Controller
     // もしデータが存在していたらupdate分を作る
     $user = Auth::user();
     $cart = new Cart();
-    $cart->user_id = $user->id;
-    $cart->item_id = $id;
-    $cart->status = 1;
-    $cart->cart_item_num = $request->item_num;
-    $cart->save();
+
+    // ユーザーIDとitem_idがある場合は、商品の個数を更新したい
+    $cart_create_or_update = Cart::where('user_id', '=', $user->id)
+    ->where('item_id', '=', $id)->get()->first();
+
+    if (is_null($cart_create_or_update)) {
+      $cart->user_id = $user->id;
+      $cart->item_id = $id;
+      $cart->status = 1;
+      $cart->cart_item_num = $request->item_num;
+      $cart->save();
+
+    }else {
+      $cart_create_or_update->cart_item_num = $request->item_num;
+      $cart_create_or_update->save();
+    }
     return redirect('/cart');
 
   }
   public function showCart()
 {
+  $cart_item_array = array();
   $user = Auth::user();
 
   $items = \DB::table('carts')
@@ -53,6 +65,24 @@ class CartController extends Controller
   ->where('status', 1)
   ->where('user_id', $user->id)
   ->get();
+  // dd($items);
+
+  foreach ($items as $key => $item) {
+    $image = ItemImage::where('item_id', '=', $item->item_id)->get()->first();
+    // dd($image);
+
+    if (isset($image)) {
+      $first_image = array('item'=>$item, 'images'=>$image->image_url);
+      array_push($cart_item_array, $first_image);
+      // dd($item_array);
+    }
+  }
+  // dd($cart_item_array);
+
+
+  return view('cart/cart', [
+    'cart_items' => $cart_item_array,
+  ]);
 
   // dd($items);
   // cartのidどうやってとったらいいんだ
@@ -60,21 +90,21 @@ class CartController extends Controller
 
   // dd($carts);
 
-  $images = \DB::table('carts')
-  ->join('item_images','item_images.item_id','=','carts.item_id')
-  ->where('status', 1)
-  ->where('user_id', $user->id)
+  // $images = \DB::table('carts')
+  // ->join('item_images','item_images.item_id','=','carts.item_id')
+  // ->where('status', 1)
+  // ->where('user_id', $user->id)
   // 同じ画像が出てきちゃう
   // ->where('id', $carts->id)
-  ->get();
+  // ->get();
   // ->join('item_images','items.id','=','item_images.item_id')
 
   // dd($images);
 
-  return view('cart/cart', [
-      'items' => $items,
-      'images' => $images,
-  ]);
+  // return view('cart/cart', [
+  //     'items' => $items,
+  //     'images' => $images,
+  // ]);
 }
 
     public function deleteCart(int $id)

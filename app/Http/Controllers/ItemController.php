@@ -12,34 +12,38 @@ class ItemController extends Controller
 {
     public function index()
   {
-    // return "Hello world";
-    // $items = Item::all();
-    // dd($items);
-    // $images = ItemImage::all();
-    // dd($images);
-    // $images = $items->ItemImage()->first();
+    $item_array = array();
+    // dd($item_array);
 
-    // dd($images);
     $items = \DB::table('items')
-    ->join('item_images','items.id','=','item_images.item_id')
+    // ->join('item_images','items.id','=','item_images.item_id')
     ->where('is_enabled', 1)
     // ->groupBy('items.id')
     // ->get();
     ->paginate(4);
 
 
+    foreach ($items as $key => $item) {
+      $image = ItemImage::where('item_id', '=', $item->id)->get()->first();
+
+      if (isset($image)) {
+        $first_image = array('item'=>$item, 'images'=>$image->image_url);
+        // dd($first_image);
+        array_push($item_array, $first_image);
+        // dd($item_array);
+      }
+    }
+
+
     return view('items/index', [
-        'items' => $items,
-        // 'images' => $images,
+      'items' => $item_array,
+      'index_items' => $items,
     ]);
 
   }
 
   public function detail(int $id)
   {
-    // return "Hello world";
-    // $items = Item::all();
-    // dd($items);
     $current_item = Item::find($id);
 
     // dd($current_item);
