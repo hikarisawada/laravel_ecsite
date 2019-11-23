@@ -5,7 +5,7 @@
 
     <div class="container">
       <ul class="index_item">
-        @foreach($items as $item)
+        @foreach($demo_item as $item)
         <li class="item_list">
             <!-- <div class="index_item_main"> -->
               <div class="index_image">

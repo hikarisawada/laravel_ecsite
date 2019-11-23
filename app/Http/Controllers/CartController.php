@@ -10,27 +10,6 @@ use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
-  //   public function cart()
-  // {
-  //   // return "Hello world";
-  //   // $items = Item::all();
-  //   // dd($items);
-  //   $current_item = Item::find();
-  //
-  //   // dd($current_item);
-  //
-  //   $images = $current_item->ItemImage()->first();
-  //
-  //   // dd($images);
-  //
-  //   return view('cart/cart', [
-  //       // 'items' => $items,
-  //       'current_item' => $current_item,
-  //       'images' => $images,
-  //
-  //   ]);
-  //
-  // }
   public function showCartPost(int $id, Request $request)
   {
     // もしデータが存在していたらupdate分を作る
@@ -116,13 +95,9 @@ class CartController extends Controller
         ->where('user_id',$user->id)
         ->get()
         ->first();
-        // dd($cart->get()->first());
-
         $cart->status = 3;
-
         $cart->save();
         return redirect('/cart');
-
     }
 
     public function cashCart(int $id)
