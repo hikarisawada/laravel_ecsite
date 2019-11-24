@@ -10,7 +10,9 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/charge', 'ChargeController@charge_view');
 
+Route::post('/charge', 'ChargeController@charge');
 
 
 // Route::get('/sample', function () {
@@ -33,6 +35,7 @@ Route::put('/cart/{id}', 'CartController@deleteCart')->name('cart.deleteCart');
 //     return view('welcome');
 // });
 Route::get('/', 'HomeController@index')->name('home');
+
 
 });
 
