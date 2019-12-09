@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta charset="utf-8">
+    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/all.js"></script>
     <title>ec_site</title>
     @yield('styles')
 
@@ -19,6 +20,7 @@
         @if(Auth::check())
           <span class="my-navbar-item">ようこそ, {{ Auth::user()->name }}さん</span>
           ｜
+          <i class="fas fa-shopping-cart" style="color:#8c8c8c;"></i>
           <a href="{{ route('cart.showCart') }}" id="" class="my-navbar-item">買い物かご</a>
           ｜
           <a href="#" id="logout" class="my-navbar-item">ログアウト</a>

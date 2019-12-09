@@ -19,20 +19,25 @@
 
 // Route::post('/upload', 'HelloController@upload');
 Route::group(['middleware' => 'auth'], function() {
+  Route::get('/items', 'ItemController@index')->name('items.index');
+  Route::get('/items/{item_id}', 'ItemController@detail')->name('items.detail');
+  Route::post('/items/{item_id}', 'ItemController@addCart');
 
-Route::get('/items', 'ItemController@index')->name('items.index');
-Route::get('/items/{item_id}', 'ItemController@detail')->name('items.detail');
-Route::post('/items/{item_id}', 'ItemController@addCart');
+  Route::get('/cart', 'CartController@showCart')->name('cart.showCart');
+  Route::post('/cart/{id}', 'CartController@showCartPost')->name('cart.add_cart');
+  Route::put('/cart/{id}', 'CartController@deleteCart')->name('cart.deleteCart');
 
-Route::get('/cart', 'CartController@showCart')->name('cart.showCart');
-Route::post('/cart/{id}', 'CartController@showCartPost')->name('cart.add_cart');
-Route::put('/cart/{id}', 'CartController@deleteCart')->name('cart.deleteCart');
-// Route::put('/cart/{id}', 'CartController@cashCart')->name('cart.cash');
+  Route::get('/cart/cashed', 'CartController@showCashed')->name('cart.showCashed');
 
-// Route::get('/items', function () {
-//     return view('welcome');
-// });
-Route::get('/', 'HomeController@index')->name('home');
+
+  Route::get('/charge', 'ChargeController@charge_view');
+  Route::post('/charge', 'ChargeController@charge');
+  // Route::put('/cart/{id}', 'CartController@cashCart')->name('cart.cash');
+
+  // Route::get('/items', function () {
+  //     return view('welcome');
+  // });
+  Route::get('/', 'HomeController@index')->name('home');
 
 });
 

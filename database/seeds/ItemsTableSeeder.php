@@ -11,7 +11,7 @@ class ItemsTableSeeder extends Seeder
      */
     public function run()
     {
-      foreach (range(1, 5) as $num) {
+      foreach (range(1, 150) as $num) {
         DB::table('items')->insert([
           'name' => "サンプル {$num}",
           'price' => $num * 100,

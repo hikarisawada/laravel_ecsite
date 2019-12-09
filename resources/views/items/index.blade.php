@@ -5,15 +5,12 @@
 
     <div class="container">
       <ul class="index_item">
-        @foreach($demo_item as $item)
+        @foreach($items as $item)
         <li class="item_list">
             <!-- <div class="index_item_main"> -->
               <div class="index_image">
                 <a href="{{ route('items.detail', ['id' => $item['item']->id]) }}">
-
-                  @for($i = 0; $i < count($item['images']); $i++)
                     <img src="{{$item['images']}}" alt="" class="item_first_image">
-                  @endfor
                 </a>
               </div>
               <div class="index_item_label">

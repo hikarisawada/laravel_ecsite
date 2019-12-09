@@ -4,14 +4,11 @@
   @section('content')
 
     <div class="">
-
-      <div class="">買い物かご</div>
+      <div class="">購入済み一覧</div>
       <table>
 
         @if(!$items->isEmpty())
-
-
-        @foreach($cart_items as $item)
+        @foreach($cash_items as $item)
         <tr class="index_item">
             <!-- <div class="index_item_main"> -->
             <td class="item_underline">
@@ -33,18 +30,14 @@
                   ¥{{ $item['item']->discount_price}}
                 </div>
                 <div class="">
-                  {{ $item['item']->cart_item_num}}個
+                  {{ $item['item']->cash_item_num}}個
+                </div>
+                <div class="">
+                  購入日時：{{ $item['item']->created_at}}
                 </div>
               </div>
             </td>
             <td>
-              <form action="{{ route('cart.deleteCart', ['id' => $item['item']->item_id]) }}" method="post">
-                @csrf
-                @method('PUT')
-                <div class="text-right">
-                  <button type="submit" class="btn">カートから削除</button>
-                </div>
-              </form>
             </td>
           <!-- </div> -->
       </tr>
@@ -56,25 +49,9 @@
           <p>個数：{{$total_price->total_num}} 個</p>
         </div>
 
-
-        <form action="{{ asset('charge') }}" method="POST">
-            {{ csrf_field() }}
-                    <script
-                            src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                            data-key="{{ $stripe_access_key }}"
-                            data-amount="{{ $total_price->total_price }}"
-                            data-name="Stripe Demo"
-                            data-label="決済をする"
-                            data-description="Online course about integrating Stripe"
-                            data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
-                            data-locale="auto"
-                            data-currency="JPY">
-                    </script>
-        </form>
-
         @else
         <div class="noDate">
-          カートに商品は入っていません。
+          購入された商品はありません。
         </div>
 
         @endif
@@ -82,7 +59,7 @@
               <a href="{{ route('items.index') }}">ショッピングを続ける</a>
             </div>
             <div class="">
-              <a href="{{ route('cart.showCashed') }}">購入済み一覧</a>
+              <a href="{{ route('cart.showCart') }}">カートに戻る</a>
             </div>
 
 

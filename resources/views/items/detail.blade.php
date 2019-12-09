@@ -3,12 +3,13 @@
 
   @section('content')
 
+
     <div class="detail_main">
             <div class="item_left">
               <!-- <a href="#"> -->
               <div class="image_main">
               @if ($images)
-                <img src="{{ asset($images->first()->image_url)}}" alt="">
+                <img src="{{ asset($images->first()->image_url)}}" alt="" id="mainImage">
               @else
                 <img src="/" alt="">
               @endif
@@ -17,8 +18,9 @@
                 <ul class="image_gallery">
 
                   @foreach ($images as $key => $value)
-                    <li><img src="{{$value->image_url}}" class="item_image"></li>
+                    <li class="image_list"><img src="{{ $value->image_url }}" class="item_image" onClick="getImage({{ $key }})"></li>
                   @endforeach
+
 
                 </ul>
 
@@ -51,9 +53,7 @@
                         <option value="{{ $item_num }}" selected="selected" name="item_num">{{ $item_num}}</option>
                     @endfor
                   </select>
-
                 </div>
-
                 <div class="">
                     @csrf
                   <!-- <a href="{{ route('cart.showCart') }}">カートに入れる</a> -->
@@ -64,9 +64,10 @@
                 <div class="">
                 <a href="/items">戻る</a>
               </div>
-
-
             </div>
         </div>
+
+        <script src="{{ asset('/js/image_change.js') }}"></script>
+
 
   @endsection

@@ -11,12 +11,14 @@ class ItemController extends Controller
 {
     public function index()
   {
+
     // データ整形
     $item_array = array();
 
     $items = \DB::table('items')
     ->where('is_enabled', 1)
-    ->paginate(4);
+    ->paginate(20);
+    // dd($items);
 
     foreach ($items as $key => $item) {
       // 最初に登録された画像の1枚を取得する
@@ -27,16 +29,6 @@ class ItemController extends Controller
       }
     }
 
-    foreach ($items as $key => $item) {
-      $image = ItemImage::where('item_id', '=', $item->id)->get()->first();
-
-      if (isset($image)) {
-        $first_image = array('item'=>$item, 'images'=>$image->image_url);
-        // dd($first_image);
-        array_push($item_array, $first_image);
-        // dd($item_array);
-      }
-    }
 
 
     return view('items/index', [
@@ -55,6 +47,7 @@ class ItemController extends Controller
     if($images == null){
       return redirect('/items');
     }
+    // dd($images);
 
     return view('items/detail', [
         'current_item' => $current_item,

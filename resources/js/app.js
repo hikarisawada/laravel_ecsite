@@ -6,6 +6,8 @@
 
 require('./bootstrap');
 
+require('./image_change')
+
 window.Vue = require('vue');
 
 /**
