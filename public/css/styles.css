@@ -55,6 +55,7 @@ ul {
 .index_item {
   display: flex;
   flex-wrap: wrap;
+  position: relative;
 
 
 }
@@ -119,8 +120,8 @@ ul {
 
 }
 
-.image_main {
-
+.mainImage {
+  width: 200px;
 }
 
 .image_gallery {
@@ -196,4 +197,23 @@ ul {
 } */
 td {
   padding: 20px;
+}
+
+.item_underline:first-child:after {
+  content: '';
+  position: absolute;
+  width: 600px;
+  height: 1px;
+  background: #331313;
+  left: 0;
+  top: 10px;
+}
+
+/* .index_item */
+
+/* cart */
+
+.noDate {
+  text-align: center;
+  margin: 20px;
 }

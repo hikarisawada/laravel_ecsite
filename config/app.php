@@ -67,7 +67,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Asia/Tokyo',
 
     /*
     |--------------------------------------------------------------------------
@@ -92,7 +92,7 @@ return [
     | the language folders that are provided through your application.
     |
     */
-
+    "testt" => "smaple_date", 
     'fallback_locale' => 'en',
 
     /*
@@ -122,6 +122,9 @@ return [
     'key' => env('APP_KEY'),
 
     'cipher' => 'AES-256-CBC',
+
+    'stripe_access_key' =>  env('STRIPE_ACCESS_KEY', false),
+    'stripe_secret_key' =>  env('STRIPE_SECRET_KEY', false),
 
     /*
     |--------------------------------------------------------------------------

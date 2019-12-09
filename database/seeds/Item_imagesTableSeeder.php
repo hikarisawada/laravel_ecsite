@@ -11,10 +11,11 @@ class Item_imagesTableSeeder extends Seeder
      */
     public function run()
     {
-      foreach (range(1, 5) as $num) {
+      foreach (range(1, 150) as $num) {
+
         DB::table('item_images')->insert([
           'item_id' => $num,
-          'image_url' => "/demo/{$num}.png",
+          'image_url' => "/demo/".rand(1,5).".png",
 
         ]);
       }
