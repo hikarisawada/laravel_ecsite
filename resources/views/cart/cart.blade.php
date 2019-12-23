@@ -51,6 +51,7 @@
         @endforeach
       </table>
       </div>
+
         <div class="">
           <p>合計金額：{{$total_price->total_price}}　円</p>
           <p>個数：{{$total_price->total_num}} 個</p>
@@ -78,10 +79,10 @@
         </div>
 
         @endif
-            <div class="">
+            <div class="continue">
               <a href="{{ route('items.index') }}">ショッピングを続ける</a>
             </div>
-            <div class="">
+            <div class="cashed-list">
               <a href="{{ route('cart.showCashed') }}">購入済み一覧</a>
             </div>
 

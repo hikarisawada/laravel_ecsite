@@ -138,6 +138,7 @@ class CartController extends Controller
         return redirect('/cart');
     }
     // stripe_access_keyが正しかったらtrue
+    
     private function setStripeUrl()
     {
       return Config::get('app.stripe_access_key');
