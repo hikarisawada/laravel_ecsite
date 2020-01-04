@@ -7,7 +7,7 @@
         <nav class="panel panel-default">
           <div class="panel-heading">パスワード再発行</div>
           <div class="panel-body">
-            <form action="{{ route('password.update') }}" method="POST">
+            <form action="{{ route('password.update', [], false) }}" method="POST">
               @csrf
               <div class="form-group">
                 <label for="email">メールアドレス</label>

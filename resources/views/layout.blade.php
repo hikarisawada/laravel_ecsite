@@ -19,16 +19,16 @@
         @if(Auth::check())
           <span class="my-navbar-item">ようこそ, {{ Auth::user()->name }}さん</span>
           ｜
-          <a href="{{ route('cart.showCart') }}" id="" class="my-navbar-item">買い物かご</a>
+          <a href="{{ route('cart.showCart', [], false) }}" id="" class="my-navbar-item">買い物かご</a>
           ｜
           <a href="#" id="logout" class="my-navbar-item">ログアウト</a>
-          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+          <form id="logout-form" action="{{ route('logout', [], false) }}" method="POST" style="display: none;">
             @csrf
           </form>
         @else
-          <a class="my-navbar-item" href="{{ route('login') }}">ログイン</a>
+          <a class="my-navbar-item" href="{{ route('login', [], false) }}">ログイン</a>
           ｜
-          <a class="my-navbar-item" href="{{ route('register') }}">会員登録</a>
+          <a class="my-navbar-item" href="{{ route('register', [], false) }}">会員登録</a>
         @endif
       </div>
     </nav>

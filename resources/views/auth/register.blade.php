@@ -15,7 +15,7 @@
               @endforeach
             </div>
             @endif
-            <form class="" action="{{ route('register') }}" method="post">
+            <form class="" action="{{ route('register', [], false) }}" method="post">
               @csrf
               <div class="form-group">
                 <label for="">メールアドレス</label>

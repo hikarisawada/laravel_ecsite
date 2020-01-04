@@ -15,7 +15,7 @@
                 @endforeach
               </div>
               @endif
-              <form class="" action="{{ route('login') }}" method="post">
+              <form class="" action="{{ route('login', [], false) }}" method="post">
                 @csrf
                 <div class="form-group">
                   <label for="">メールアドレス</label>
@@ -34,7 +34,7 @@
             </div>
           </nav>
               <div class="text-center">
-                <a href="{{ route('password.request') }}">パスワードの変更はこちらから</a>
+                <a href="{{ route('password.request', [], false) }}">パスワードの変更はこちらから</a>
               </div>
 
             </div>

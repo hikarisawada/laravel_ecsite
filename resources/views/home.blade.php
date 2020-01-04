@@ -9,7 +9,7 @@
         <div class="panel-heading">ec_siteへようこそ！</div>
         <div class="panel-body">
           <div class="">
-            <a href="{{ route('items.index') }}" class="btn btn-primary">
+            <a href="{{ route('items.index', [], false) }}" class="btn btn-primary">
               商品一覧へ
             </a>
 

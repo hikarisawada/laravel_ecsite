@@ -12,7 +12,7 @@
                 {{ session('status') }}
               </div>
             @endif
-            <form action="{{ route('password.email') }}" method="POST">
+            <form action="{{ route('password.email', [], false) }}" method="POST">
               @csrf
               <div class="form-group">
                 <label for="email">メールアドレス</label>
